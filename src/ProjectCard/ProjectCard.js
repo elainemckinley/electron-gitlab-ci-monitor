@@ -12,16 +12,18 @@ class ProjectCard extends Component {
     }
 
     componentDidMount() {
-        const {project} = this.props
+        const { project } = this.props
 
         setInterval(
-            () => {
-                fetchProjectStatus(project.id)
-                    .then(response => {
-                        this.setState({
-                            ...response
-                        })
+            async () => {
+                try {
+                    const projectStatus = await fetchProjectStatus(project.id)
+                    this.setState({
+                        ...projectStatus
                     })
+                } catch(e) {
+                    this.setState({ status: 'failed' })
+                }
             },
             10000
         )

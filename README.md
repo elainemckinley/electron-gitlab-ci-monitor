@@ -12,7 +12,10 @@
 
 - [ ] Read projects/api/refresh rate configuration from a file
 
-- [ ] URL encode a projects path instead of using project id
+- [ ] URL encode projects' path instead of using project id
 
 - [ ] Pretty up css and orient cards well
 
+- [ ] Add to README
+
+- [ ] Build pipeline and unit tests
