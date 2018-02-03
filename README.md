@@ -9,7 +9,10 @@
 ## TODOs:
 
 [ ] Build the project more sensibly, should only need one task to run development. Probably requires ejecting CRA.
+
 [ ] Read projects/api/refresh rate configuration from a file
+
 [ ] URL encode a projects path instead of using project id
+
 [ ] Pretty up css and orient cards well
 
