@@ -7,6 +7,22 @@
     margin: 8px;
 }
 
-.successful {
-    background-color: rgb(48, 197, 11);
+.created {
+    background-color: yellow;
+}
+
+.running .pending {
+    background-color: blue;
+}
+
+.failed {
+    background-color: red;
+}
+
+.success {
+    background-color: green;
+}
+
+.canceled .skipped .manual {
+    background-color: grey;
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import './ProjectCard.css'
+import fetchProjectStatus from './fetchProjectStatus'
 
 class ProjectCard extends Component {
     constructor() {
@@ -11,9 +12,19 @@ class ProjectCard extends Component {
     }
 
     componentDidMount() {
-        // setInterval(() => {
-        //     fetch('gitlab').then(response => this.setState({response}))
-        // })
+        const {project} = this.props
+
+        setInterval(
+            () => {
+                fetchProjectStatus(project.id)
+                    .then(response => {
+                        this.setState({
+                            ...response
+                        })
+                    })
+            },
+            10000
+        )
     }
 
     render() {
@@ -25,7 +36,6 @@ class ProjectCard extends Component {
             <h2>{displayName}</h2>
             <h4>{location}</h4>
         </div>
-
     }
 }
 

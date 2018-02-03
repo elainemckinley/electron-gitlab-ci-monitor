@@ -1,2 +1,1 @@
 # Electron Gitlab CI Monitor
-
