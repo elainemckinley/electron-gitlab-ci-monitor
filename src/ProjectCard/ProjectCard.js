@@ -12,20 +12,25 @@ class ProjectCard extends Component {
     }
 
     componentDidMount() {
-        const { project } = this.props
+        const {
+            project,
+            apiBase,
+            apiToken,
+            refreshRate
+        } = this.props
 
         setInterval(
             async () => {
                 try {
-                    const projectStatus = await fetchProjectStatus(project.id)
+                    const projectStatus = await fetchProjectStatus(project.id, apiBase, apiToken)
                     this.setState({
                         ...projectStatus
                     })
-                } catch(e) {
+                } catch (e) {
                     this.setState({ status: 'failed' })
                 }
             },
-            10000
+            refreshRate
         )
     }
 

@@ -1,37 +1,35 @@
 import React, { Component } from 'react'
 import './Canvas.css'
+import ConfigEntry from './ConfigEntry'
 import ProjectCard from '../ProjectCard/ProjectCard'
 
 class Canvas extends Component {
     constructor() {
         super()
-        this.state = {
-            projects: [{
-                id: '5356024',
-                displayName: 'Testing CI',
-                location: 'austinmckinley/Testing-CI'
-            }]
-        }
-    }
-
-    componentDidMount() {
-        // TODO set state of projects from input file
+        this.state = {}
     }
 
     render() {
-        return (
-            <div className="Canvas">
-                {
-                    this.state.projects.map((project, index) =>
-                        <ProjectCard
-                            key={index}
-                            project={project}
-                            apiBase={this.state.apiBase}
-                        />
-                    )
-                }
-            </div>
-        )
+        if (!this.state.config) {
+            return <ConfigEntry onConfigReceived={config => this.setState({ config })} />
+        } else {
+            const { config } = this.state
+            return (
+                <div className="Canvas">
+                    {
+                        config.projects.map((project, index) =>
+                            <ProjectCard
+                                key={index}
+                                project={project}
+                                apiBase={config.apiBaseUrl}
+                                apiToken={config.apiToken}
+                                refreshRate={config.projectRefreshMillis}
+                            />
+                        )
+                    }
+                </div>
+            )
+        }
     }
 }
 

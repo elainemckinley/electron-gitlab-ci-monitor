@@ -1,7 +1,5 @@
-export default async (projectId) => {
-    const apiBase = 'https://gitlab.com/api/v4'
-    const privateToken = 'your token here'
-    const endpoint = `${apiBase}/projects/${projectId}/jobs?private_token=${privateToken}`
+export default async (projectId, apiBase, apiToken) => {
+    const endpoint = `${apiBase}/projects/${projectId}/jobs?private_token=${apiToken}`
 
     const response = await fetch(endpoint)
     if (response.ok) {
@@ -14,9 +12,6 @@ export default async (projectId) => {
         console.log('changed to ', newStatus)
         return newStatus
     } else {
-        throw {
-            status: response.status,
-            statusText: response.statusText
-        }
+        throw new Error(`List project jobs failed with code ${response.status} and body ${response.statusText}`)
     }
 }

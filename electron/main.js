@@ -1,7 +1,7 @@
 const electron = require('electron')
 // Module to control application life.
 const app = electron.app
-console.log('home is ', app.getPath('userData'))
+
 // Module to create native browser window.
 const BrowserWindow = electron.BrowserWindow
 
