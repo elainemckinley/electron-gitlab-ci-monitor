@@ -22,3 +22,5 @@ yarn-error.log*
 
 .private-token
 **/config.json
+
+dist

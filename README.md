@@ -2,21 +2,21 @@
 
 ## Startup Instructions
 
-1. Copy `public/config-example.json` to `public/config.json` and fill in your api info and project configuration
+1. Copy `config-example.json` to `config.json` and fill in your api info and project configuration
 1. `yarn install` from the root
 1. `yarn run start`
 1. In a new terminal window/tab, `yarn run electron`
-1. When the application comes up, put `http://localhost:3000/config.json` into the config location text box
+1. When the application comes up, put `./config.json` into the config location text box
 
 ## MVP TODOs:
 
-- [ ] Build the project more sensibly, should only need one task to run development. Probably requires ejecting CRA.
+- [X] Build the project more sensibly, probably requires ejecting CRA.
 
 - [X] Read projects/api/refresh rate configuration from a URL
 
-- [ ] Read projects/api/refresh rate configuration from a file
+- [X] Read projects/api/refresh rate configuration from a file
 
-- [ ] Persist config location between app loads
+- [ ] Persist config location between app loads (electron-config)
 
 - [ ] URL encode projects' path instead of using project id
 
