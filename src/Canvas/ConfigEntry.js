@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { fetchConfiguration } from './fetchConfiguration'
+import Config from 'electron-config'
+const config = new Config()
 
 class ConfigEntry extends Component {
     constructor() {
@@ -9,6 +11,12 @@ class ConfigEntry extends Component {
             error: '',
             loading: false
         }
+    }
+
+    componentDidMount() {
+        this.setState({
+            configUrl: config.get('configUrl') || ''
+        })
     }
 
     render() {
@@ -34,6 +42,7 @@ class ConfigEntry extends Component {
         const configuration = await fetchConfiguration(this.state.configUrl)
 
         if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
+            config.set('configUrl', this.state.configUrl)
             this.props.onConfigReceived(configuration)
         } else {
             console.error('Configuration does not contain all necessary keys')
