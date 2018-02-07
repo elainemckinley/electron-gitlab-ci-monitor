@@ -22,7 +22,7 @@ class ProjectCard extends Component {
         setInterval(
             async () => {
                 try {
-                    const projectStatus = await fetchProjectStatus(project.id, apiBase, apiToken)
+                    const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
                     this.setState({
                         ...projectStatus
                     })

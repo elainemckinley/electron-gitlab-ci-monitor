@@ -1,0 +1,9 @@
+{
+    "apiToken": "your token here",
+    "apiBaseUrl": "https://gitlab.com/api/v4",
+    "projectRefreshMillis": 10000,
+    "projects": [{
+        "displayName": "Testing CI",
+        "location": "austinmckinley/Testing-CI"
+    }]
+}

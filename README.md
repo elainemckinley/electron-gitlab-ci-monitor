@@ -16,9 +16,11 @@
 
 - [X] Read projects/api/refresh rate configuration from a file
 
-- [ ] Persist config location between app loads (electron-config)
+- [X] Persist config location between app loads (electron-config)
 
-- [ ] URL encode projects' path instead of using project id
+- [X] Use correct Gitlab API (Should track pipelines instead of jobs)
+
+- [X] URL encode projects' path instead of using project id
 
 - [ ] Pretty up css and orient cards well
 

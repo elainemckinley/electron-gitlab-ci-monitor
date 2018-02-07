@@ -1,17 +1,21 @@
-export default async (projectId, apiBase, apiToken) => {
-    const endpoint = `${apiBase}/projects/${projectId}/jobs?private_token=${apiToken}`
+export default async (projectLocation, apiBase, apiToken) => {
+    try {
+        const pipelinesUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines?private_token=${apiToken}`
+        const pipelines = await fetch(pipelinesUrl)
+        const pipelineId = (await pipelines.json())[0]['id']
 
-    const response = await fetch(endpoint)
-    if (response.ok) {
-        const mostRecentBuild = (await response.json())[0]
+        const lastPipelineUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines/${pipelineId}?private_token=${apiToken}`
+        const lastPipelineResponse = await fetch(lastPipelineUrl)
+        const lastPipeline = await lastPipelineResponse.json()
+
         const newStatus = {
-            status: mostRecentBuild.status,
-            lastModifiedBy: mostRecentBuild.commit.author_name,
-            lastRun: mostRecentBuild.finished_at
+            status: lastPipeline.status,
+            lastModifiedBy: lastPipeline.user.name,
+            lastRun: lastPipeline.finished_at
         }
         console.log('changed to ', newStatus)
         return newStatus
-    } else {
-        throw new Error(`List project jobs failed with code ${response.status} and body ${response.statusText}`)
+    } catch (exception) {
+        console.error('Failed to get pipeline status: ', exception)
     }
 }
