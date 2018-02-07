@@ -14,15 +14,18 @@ class ConfigEntry extends Component {
     }
 
     componentDidMount() {
-        this.setState({
-            configUrl: config.get('configUrl') || ''
-        })
+        if (config.has('configUrl')) {
+            this.submitConfigUrl(config.get('configUrl'))
+        }
     }
 
     render() {
         return <div className="ConfigEntry">
             <h2>No config found</h2>
-            <form onSubmit={(event) => this.submitConfigUrl(event)}>
+            <form onSubmit={(event) => {
+                event.preventDefault()
+                this.submitConfigUrl(this.state.configUrl)
+            }}>
                 <label>
                     Please enter the location of your config.json file is located (local or remote):
                     <input
@@ -35,17 +38,17 @@ class ConfigEntry extends Component {
         </div>
     }
 
-    async submitConfigUrl(event) {
-        event.preventDefault()
+    async submitConfigUrl(configUrl) {
         this.setState({ loading: true })
 
-        const configuration = await fetchConfiguration(this.state.configUrl)
+        const configuration = await fetchConfiguration(configUrl)
 
         if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
-            config.set('configUrl', this.state.configUrl)
+            config.set('configUrl', configUrl)
             this.props.onConfigReceived(configuration)
         } else {
             console.error('Configuration does not contain all necessary keys')
+            config.delete('configUrl')
             this.setState({
                 loading: false,
                 error: 'Configuration does not contain all necessary keys'
