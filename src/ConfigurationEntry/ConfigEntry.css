@@ -1,0 +1,28 @@
+.ConfigEntry {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.loaderContainer {
+    display: flex;
+    margin: 0 auto;
+}
+
+.urlLoader, .fileSystemLoader {
+    width: 50%;
+    margin: 8px;
+    padding: 0px 8px 8px 8px;
+    background: rgba(255, 255, 255, 0.2);
+    flex: 1;
+}
+
+input[type=text] {
+    width: 99%;
+    height: 28px;
+    font-size: 14px;
+    color: #555;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}

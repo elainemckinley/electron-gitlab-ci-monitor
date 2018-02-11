@@ -6,8 +6,8 @@ class ProjectCard extends Component {
     constructor() {
         super()
         this.state = {
-            status: 'successful',
-            lastRun: '24 minutes ago'
+            status: 'pending',
+            lastRun: 'never'
         }
     }
 
@@ -19,7 +19,7 @@ class ProjectCard extends Component {
             refreshRate
         } = this.props
 
-        setInterval(
+        const interval = setInterval(
             async () => {
                 try {
                     const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
@@ -32,6 +32,14 @@ class ProjectCard extends Component {
             },
             refreshRate
         )
+
+        this.setState({
+            interval
+        })
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.state.interval)
     }
 
     render() {
