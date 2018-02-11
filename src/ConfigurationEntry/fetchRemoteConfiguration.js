@@ -1,10 +1,11 @@
+import { get } from '../util/fetchUtil'
+
 export const fetchRemoteConfiguration = async (location) => {
-    // TODO: Fix this to not use browser fetch (avoid CORS issues)
-    const config = await fetch(location)
-    if (config.ok) {
-        return await config.json()
-    } else {
-        throw new Error(`Failed to fetch configuration from ${location}; returned ${config.status}`)
+    try {
+        const config = get(location)
+        return config.body
+    } catch (exception) {
+        console.error('Failed to get confiuration file: ', exception)
     }
 }
 

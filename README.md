@@ -30,4 +30,10 @@
 
 - [ ] Do not pass down fetch config as props (use React contexts maybe?)
 
-- [ ] Standardize config names with internal names
+- [X] Standardize config names with internal names
+
+- [X] Do not use browser fetch to avoid CORS issues on self-hosted gitlab
+
+- [ ] Add error messaging to Config page
+
+- [ ] Add error messaging to Projects page
