@@ -2,11 +2,11 @@ import { get } from '../util/fetchUtil'
 
 export default async (projectLocation, apiBase, apiToken) => {
     try {
-        const pipelinesUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines?private_token=${apiToken}`
+        const pipelinesUrl = `${apiBase}${encodeURIComponent(projectLocation)}/pipelines?private_token=${apiToken}`
         const pipelines = await get(pipelinesUrl)
-        const pipelineId = pipelines.body[0]['id']
-
-        const lastPipelineUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines/${pipelineId}?private_token=${apiToken}`
+        const filteredPipelines = pipelines.body.filter(p => p.status !== 'skipped')
+        const pipelineId = filteredPipelines[0]['id']
+        const lastPipelineUrl = `${apiBase}${encodeURIComponent(projectLocation)}/pipelines/${pipelineId}?private_token=${apiToken}`
         const lastPipelineResponse = await get(lastPipelineUrl)
         const lastPipeline = lastPipelineResponse.body
 
@@ -20,5 +20,11 @@ export default async (projectLocation, apiBase, apiToken) => {
         return newStatus
     } catch (exception) {
         console.error('Failed to get pipeline status: ', exception)
+
+        return {
+            status: 'error',
+            lastModifiedBy: '',
+            lastRun: ''
+        }
     }
 }

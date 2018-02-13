@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './ProjectCard.css'
 import fetchProjectStatus from './fetchProjectStatus'
+import moment from 'moment'
 
 class ProjectCard extends Component {
     constructor() {
@@ -22,7 +23,8 @@ class ProjectCard extends Component {
         const interval = setInterval(
             async () => {
                 try {
-                    const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
+                    const projectStatus = await fetchProjectStatus(
+                        project.location, apiBase, apiToken)
                     this.setState({
                         ...projectStatus
                     })
@@ -43,13 +45,31 @@ class ProjectCard extends Component {
     }
 
     render() {
-        const { displayName, location } = this.props.project
+        const { location, displayName } = this.props.project
+        const { status, lastRun } = this.state
         const classList = ['ProjectCard']
-        classList.push(this.state.status)
+        const statusClassList = []
+        const projectName = location.split('/').slice(-1)
+        let timestamp
+
+        classList.push(status)
+        if (status === 'pending' || status === 'running') {
+            statusClassList.push('loading')
+        } else {
+            timestamp = lastRun ? moment(lastRun).format('ddd, MMM Do h:mma') : ''
+        }
 
         return <div className={classList.join(' ')}>
-            <h2>{displayName}</h2>
-            <h4>{location}</h4>
+            <div>
+                <h2>{displayName}</h2>
+                <div className="description">
+                    {projectName}
+                </div>
+            </div>
+            <div className="footer">
+                <span className={statusClassList.join(' ')}>{status}</span>
+                <span>{timestamp}</span>
+            </div>
         </div>
     }
 }

@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import './Canvas.css'
+import './Carousel.css'
 import ConfigEntry from '../ConfigurationEntry/ConfigEntry'
 import ProjectCard from '../ProjectCard/ProjectCard'
+import { Carousel } from 'react-responsive-carousel'
 
 class Canvas extends Component {
     constructor() {
@@ -19,29 +21,54 @@ class Canvas extends Component {
             />
         } else {
             const { config } = this.state
+
             return (
                 <div className="Canvas">
-                    <div className="Projects">
-                        {
-                            config.projects.map((project, index) =>
-                                <ProjectCard
-                                    key={index}
-                                    project={project}
-                                    apiBase={config.apiBaseUrl}
-                                    apiToken={config.apiToken}
-                                    refreshRate={config.projectRefreshMillis}
-                                />
-                            )
-                        }
-                    </div>
+                    <Carousel
+                        showArrows={true}
+                        showThumbs={false}
+                        transitionTime={1000}
+                        interval={config.carouselInterval}
+                        infiniteLoop
+                        autoPlay>
+                        {Object.keys(config.projects).map(
+                            (key, index) => this.renderProjectGroup(key, index)
+                        )}
+                    </Carousel>
                     <a onClick={_ => {
-                        this.setState({ config: null, loadConfigOnMount: false })
+                        this.setState(
+                            { config: null, loadConfigOnMount: false })
                     }}>
                         Configure
                     </a>
                 </div>
             )
         }
+    }
+
+    renderProjectGroup(key, index) {
+        const { config } = this.state
+
+        return <div className={`Group Group-${index} ${key}`} key={index}>
+            <h1>{key}</h1>
+            <div className="Projects Components">
+                {config.projects[key].map(
+                    (project, index) => this.renderProjectCards(project, index)
+                )}
+            </div>
+        </div>
+    }
+
+    renderProjectCards(project, index) {
+        const { config } = this.state
+
+        return <ProjectCard
+            key={index}
+            project={project}
+            apiBase={config.apiBaseUrl}
+            apiToken={config.apiToken}
+            refreshRate={config.projectRefreshMillis}
+        />
     }
 }
 

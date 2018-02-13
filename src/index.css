@@ -1,4 +1,17 @@
+* {
+  box-sizing: border-box;
+}
+
 body {
-    background-color: #222;
-    font-family: sans-serif;
+  min-height: 100vh;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  background-color: #222;
+}
+
+h1 {
+  margin: 0 0 0 8px;
+  display: inline;
+  color: white;
+  text-transform: uppercase;
 }
