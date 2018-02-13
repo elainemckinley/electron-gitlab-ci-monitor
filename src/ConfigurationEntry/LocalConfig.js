@@ -20,7 +20,7 @@ class LocalConfig extends Component {
 
     render() {
         return <div className="fileSystemLoader">
-            <h4>Local</h4>
+            <h2>Local</h2>
             <form onSubmit={(event) => {
                 event.preventDefault()
                 this.submitConfig(this.state.location)
@@ -30,6 +30,7 @@ class LocalConfig extends Component {
                 <input
                     type="text"
                     value={this.state.location}
+                    placeholder="./config.json"
                     onChange={event => this.setState({ location: event.target.value })}
                 />
             </form>
