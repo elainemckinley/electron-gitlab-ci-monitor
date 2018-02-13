@@ -8,7 +8,7 @@ const config = new Config()
 class ConfigEntry extends Component {
     render() {
         return <div className="ConfigEntry">
-            <h2>Configuration</h2>
+            <h1>Configuration</h1>
             <div className="loaderContainer">
                 <LocalConfig config={config} {...this.props} />
                 <RemoteConfig config={config} {...this.props} />

@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import './ProjectCard.css'
 import fetchProjectStatus from './fetchProjectStatus'
+import moment from 'moment'
 
 class ProjectCard extends Component {
     constructor() {
@@ -22,7 +23,8 @@ class ProjectCard extends Component {
         const interval = setInterval(
             async () => {
                 try {
-                    const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
+                    const projectStatus = await fetchProjectStatus(
+                        project.location, apiBase, apiToken)
                     this.setState({
                         ...projectStatus
                     })
@@ -43,13 +45,32 @@ class ProjectCard extends Component {
     }
 
     render() {
-        const { displayName, location } = this.props.project
-        const classList = ['ProjectCard']
-        classList.push(this.state.status)
+        const { location, displayName } = this.props.project
+        const { status, lastRun } = this.state
+        const projectName = location.split('/').slice(-1)
+        let displayStatus = status
+        let timestamp = ''
+        const statusClassList = []
 
-        return <div className={classList.join(' ')}>
-            <h2>{displayName}</h2>
-            <h4>{location}</h4>
+        if (status === 'pending' || status === 'running') {
+            statusClassList.push('loading')
+        } else if (status === ' error') {
+            displayStatus = 'error retrieving project'
+        } else if (lastRun) {
+            timestamp = moment(lastRun).format('ddd, MMM Do h:mma')
+        }
+
+        return <div className={`ProjectCard ${status}`}>
+            <div>
+                <h2>{displayName}</h2>
+                <div className="description">
+                    {projectName}
+                </div>
+            </div>
+            <div className="footer">
+                <span className={statusClassList.join(' ')}>{displayStatus}</span>
+                <span>{timestamp}</span>
+            </div>
         </div>
     }
 }

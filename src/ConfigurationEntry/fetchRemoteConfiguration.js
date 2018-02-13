@@ -5,7 +5,7 @@ export const fetchRemoteConfiguration = async (location) => {
         const config = get(location)
         return config.body
     } catch (exception) {
-        console.error('Failed to get confiuration file: ', exception)
+        console.error('Failed to get configuration file: ', exception)
     }
 }
 

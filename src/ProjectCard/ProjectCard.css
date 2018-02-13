@@ -1,28 +1,144 @@
-.ProjectCard {
-    background-color: #000000;
-    color: white;
-    padding: 8px;
-    width: 100%;
-    height: 100%;
-    margin: 8px;
+.Group {
+  display: flex;
+  flex-direction: column;
+  padding: 8px 20px 32px 20px;
+  height: 100vh;
 }
 
-.created {
-    background-color: yellow;
+.Projects {
+  display: flex;
+  flex-flow: row wrap;
+  flex: 1;
 }
 
-.running .pending {
-    background-color: blue;
+.Projects .ProjectCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1 1 250px;
+  min-width: 250px;
+  background-color: transparent;
+  color: #222222;
+  margin: 8px;
+  padding: 8px;
+  border-radius: 2px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.24);
 }
 
-.failed {
-    background-color: red;
+.Projects .ProjectCard h2 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2em;
+  color: #ffffff;
+  text-shadow: 1px 1px rgba(0, 0, 0, 1);
+  margin: 0 0 8px 0;
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.success {
-    background-color: green;
+.Projects .ProjectCard .description {
+  display: block;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
 }
 
-.canceled .skipped .manual {
-    background-color: grey;
+.Projects .ProjectCard .footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 8px 0 0 0;
+  margin: 8px 0 0 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.15);
+  font-size: 1em;
+}
+
+.Projects .ProjectCard.created {
+  background-color: #fdd835;
+}
+
+.Projects .ProjectCard.running {
+  overflow: hidden;
+  position: relative;
+  background-color: #0080c5;
+  transition: 500ms linear;
+  -webkit-transition: 500ms linear;
+}
+
+.Projects .ProjectCard.running:after {
+  -webkit-animation: stripes-move 2s linear infinite;
+  animation: stripes-move 2s linear infinite;
+  content: "";
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  position: absolute;
+  background-size: 50px 50px;
+  overflow: hidden;
+  animation: stripes-move 1s linear infinite;
+  -webkit-animation: stripes-move 1s linear infinite;
+  background-image: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+  background-image: linear-gradient(-45deg, rgba(255, 255, 255, 0.2) 25%, transparent 25%, transparent 50%, rgba(255, 255, 255, 0.2) 50%, rgba(255, 255, 255, 0.2) 75%, transparent 75%, transparent);
+}
+
+@-webkit-keyframes stripes-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+@keyframes stripes-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 50px 50px;
+  }
+}
+
+.Projects .ProjectCard.error {
+  background-color: #e75e40;
+}
+
+.Projects .ProjectCard.failed {
+  background-color: #e7484d;
+}
+
+.Projects .ProjectCard.success {
+  background-color: #00ad68;
+}
+
+.Projects .ProjectCard.pending,
+.Projects .ProjectCard.canceled,
+.Projects .ProjectCard.skipped,
+.Projects .ProjectCard.manual {
+  background-color: #aaaaaa;
+}
+
+.footer .loading:after {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
+  -webkit-animation: ellipsis steps(4, end) 900ms infinite;
+  animation: ellipsis steps(4, end) 900ms infinite;
+  content: "\2026";
+  width: 0px;
+}
+
+@keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
+}
+
+@-webkit-keyframes ellipsis {
+  to {
+    width: 1.25em;
+  }
 }

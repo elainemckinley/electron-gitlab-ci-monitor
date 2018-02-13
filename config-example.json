@@ -2,8 +2,35 @@
     "apiToken": "your token here",
     "apiBaseUrl": "https://gitlab.com/api/v4",
     "projectRefreshMillis": 10000,
-    "projects": [{
-        "displayName": "Testing CI",
-        "location": "austinmckinley/Testing-CI"
-    }]
+    "carouselInterval": 6000,
+    "projects": {
+        "namespaceA": [
+            {
+                "displayName": "Project 1",
+                "location": "/namespace-a/project-name-1"
+            },
+            {
+                "displayName": "Project 2",
+                "location": "/namespace-a/project-name-1"
+            },
+            {
+                "displayName": "Project 3",
+                "location": "/namespace-a/project-name-3"
+            }
+        ],
+        "namespaceB": [
+            {
+                "displayName": "Project 4",
+                "location": "/namespace-b/project-name-4"
+            },
+            {
+                "displayName": "Project 5",
+                "location": "/namespace-b/project-name-5"
+            },
+            {
+                "displayName": "Project 6",
+                "location": "/namespace-b/project-name-6"
+            }
+        ]
+    }
 }

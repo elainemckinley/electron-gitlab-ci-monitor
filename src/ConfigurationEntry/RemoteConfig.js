@@ -11,7 +11,7 @@ class RemoteConfig extends Component {
     }
 
     componentDidMount() {
-        const {config, loadConfigOnMount} = this.props
+        const { config, loadConfigOnMount } = this.props
         const configuration = config.get(CONFIG_FILE_LOCATION, {})
         if (configuration.type === 'remote' && loadConfigOnMount) {
             this.submitConfig(configuration.location)
@@ -20,15 +20,17 @@ class RemoteConfig extends Component {
 
     render() {
         return <div className="urlLoader">
-            <h4>Remote</h4>
+            <h2>Remote</h2>
             <form onSubmit={(event) => {
                 event.preventDefault()
                 this.submitConfig(this.state.location)
             }}>
                 <label>
                     Enter URL location of config file
-                    <input type="text"
+                    <input
+                        type="text"
                         value={this.state.location}
+                        placeholder="http://www.example.com/config.json"
                         onChange={event => this.setState({ location: event.target.value })}
                     />
                 </label>
@@ -39,7 +41,8 @@ class RemoteConfig extends Component {
     async submitConfig(location) {
         const configuration = await fetchRemoteConfiguration(location)
 
-        if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
+        if (configuration['apiToken'] && configuration['apiBaseUrl']
+            && configuration['projects']) {
             this.props.config.set(CONFIG_FILE_LOCATION, {
                 type: 'remote',
                 location

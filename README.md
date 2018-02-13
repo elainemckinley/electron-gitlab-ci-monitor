@@ -22,7 +22,7 @@
 
 - [X] URL encode projects' path instead of using project id
 
-- [ ] Pretty up css and orient cards well
+- [X] Pretty up css and orient cards well
 
 - [ ] Add to README
 
