@@ -35,12 +35,11 @@ class Canvas extends Component {
                             (key, index) => this.renderProjectGroup(key, index)
                         )}
                     </Carousel>
-                    <a onClick={_ => {
-                        this.setState(
-                            { config: null, loadConfigOnMount: false })
-                    }}>
-                        Configure
-                    </a>
+                    <div id="Configure">
+                        <a onClick={_ => {this.setState({ config: null, loadConfigOnMount: false })}}>
+                            Configure
+                        </a>
+                    </div>
                 </div>
             )
         }

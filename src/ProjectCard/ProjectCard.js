@@ -47,19 +47,20 @@ class ProjectCard extends Component {
     render() {
         const { location, displayName } = this.props.project
         const { status, lastRun } = this.state
-        const classList = ['ProjectCard']
-        const statusClassList = []
         const projectName = location.split('/').slice(-1)
-        let timestamp
+        let displayStatus = status
+        let timestamp = ''
+        const statusClassList = []
 
-        classList.push(status)
         if (status === 'pending' || status === 'running') {
             statusClassList.push('loading')
-        } else {
-            timestamp = lastRun ? moment(lastRun).format('ddd, MMM Do h:mma') : ''
+        } else if (status === ' error') {
+            displayStatus = 'error retrieving project'
+        } else if (lastRun) {
+            timestamp = moment(lastRun).format('ddd, MMM Do h:mma')
         }
 
-        return <div className={classList.join(' ')}>
+        return <div className={`ProjectCard ${status}`}>
             <div>
                 <h2>{displayName}</h2>
                 <div className="description">
@@ -67,7 +68,7 @@ class ProjectCard extends Component {
                 </div>
             </div>
             <div className="footer">
-                <span className={statusClassList.join(' ')}>{status}</span>
+                <span className={statusClassList.join(' ')}>{displayStatus}</span>
                 <span>{timestamp}</span>
             </div>
         </div>
