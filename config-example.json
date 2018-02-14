@@ -1,36 +1,49 @@
 {
-    "apiToken": "your token here",
-    "apiBaseUrl": "https://gitlab.com/api/v4",
-    "projectRefreshMillis": 10000,
-    "carouselInterval": 6000,
+    "apiToken": "fake token",
+    "apiBaseUrl": "http://localhost:3000/api/v4",
+    "projectRefreshMillis": 5000,
+    "carouselInterval": 3000,
     "projects": {
-        "namespaceA": [
-            {
-                "displayName": "Project 1",
-                "location": "/namespace-a/project-name-1"
-            },
-            {
-                "displayName": "Project 2",
-                "location": "/namespace-a/project-name-1"
-            },
-            {
-                "displayName": "Project 3",
-                "location": "/namespace-a/project-name-3"
-            }
-        ],
-        "namespaceB": [
-            {
-                "displayName": "Project 4",
-                "location": "/namespace-b/project-name-4"
-            },
-            {
-                "displayName": "Project 5",
-                "location": "/namespace-b/project-name-5"
-            },
-            {
-                "displayName": "Project 6",
-                "location": "/namespace-b/project-name-6"
-            }
-        ]
+        "Services": [{
+            "displayName": "Account",
+            "location": "development-team/account"
+        }, {
+            "displayName": "Validation",
+            "location": "development-team/validation"
+        }, {
+            "displayName": "Payment",
+            "location": "development-team/payment"
+        }, {
+            "displayName": "Agent",
+            "location": "development-team/agent"
+        }, {
+            "displayName": "Scheduling",
+            "location": "development-team/scheduling"
+        }, {
+            "displayName": "Orchestration",
+            "location": "development-team/orchestration"
+        }],
+        "Front End": [{
+            "displayName": "Login",
+            "location": "development-team/login"
+        }, {
+            "displayName": "Chat",
+            "location": "development-team/chat"
+        }, {
+            "displayName": "Photos",
+            "location": "development-team/photos"
+        }, {
+            "displayName": "Notifications",
+            "location": "development-team/notifications"
+        }, {
+            "displayName": "Payment",
+            "location": "development-team/payment"
+        }, {
+            "displayName": "Products",
+            "location": "development-team/products"
+        }, {
+            "displayName": "Billing",
+            "location": "development-team/billing"
+        }]
     }
 }

@@ -4,8 +4,7 @@
   "private": true,
   "main": "electron/main.js",
   "scripts": {
-    "electron": "electron .",
-    "start": "webpack --watch",
+    "start": "electron . & webpack --watch & node simulator.js",
     "build": "webpack",
     "test": "jest --watch",
     "test:once": "jest",
@@ -71,6 +70,7 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-react": "^7.6.1",
     "jest-css-modules": "^1.1.0",
+    "quick-simulator-server": "^0.1.0",
     "react-test-renderer": "^16.2.0"
   }
 }
