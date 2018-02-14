@@ -2,10 +2,12 @@ module.exports = {
     "env": {
         "browser": true,
         "commonjs": true,
-        "es6": true
+        "es6": true,
+        "jest": true
     },
     "extends": ["eslint:recommended", "plugin:react/recommended"],
     "parserOptions": {
+        "ecmaVersion": 8,
         "ecmaFeatures": {
             "experimentalObjectRestSpread": true,
             "jsx": true
@@ -33,6 +35,7 @@ module.exports = {
             "never"
         ],
         "react/jsx-tag-spacing": 1,
+        "react/prop-types": 0,
         "no-console": 0
     }
 };

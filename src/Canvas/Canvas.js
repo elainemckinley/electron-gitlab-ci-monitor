@@ -36,7 +36,7 @@ class Canvas extends Component {
                         )}
                     </Carousel>
                     <div id="Configure">
-                        <a onClick={_ => {this.setState({ config: null, loadConfigOnMount: false })}}>
+                        <a onClick={() => {this.setState({ config: null, loadConfigOnMount: false })}}>
                             Configure
                         </a>
                     </div>

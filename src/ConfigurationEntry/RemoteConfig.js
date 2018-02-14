@@ -50,7 +50,7 @@ class RemoteConfig extends Component {
             this.props.onConfigReceived(configuration)
         } else {
             console.error('Configuration does not contain all necessary keys')
-            config.delete(CONFIG_FILE_LOCATION)
+            this.props.config.delete(CONFIG_FILE_LOCATION)
         }
     }
 }
