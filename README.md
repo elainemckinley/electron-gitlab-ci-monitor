@@ -1,39 +1,41 @@
-# Electron Gitlab CI Monitor
+# Gitlab CI Build Monitor
+See your team's build statuses at a glance.
+![Monitor Screenshot](https://i.imgur.com/9uqgfzA.png)
 
-## Startup Instructions
+## Getting Started
+1. Install the app for your platform. Installers can be found under releases.
+1. Write a configuration file, either on the machine running the build or hosted remotely.
+1. Start the app, and set the location for your config file.
 
-1. Copy `config-example.json` to `config.json` and fill in your api info and project configuration
-1. `yarn install` from the root
-1. `yarn run start`
-1. In a new terminal window/tab, `yarn run electron`
-1. When the application comes up, put `./config.json` into the config location text box
+### Config file format:
+```json
+{
+    "apiToken": "your gitlab api token",
+    "apiBaseUrl": "http://gitlab.com/api/v4",
+    "refreshInterval": 10000, // times are in milliseconds
+    "autoScrollInterval": 5000, // times are in milliseconds
+    "projects": {
+        "Page 1 Title": [{
+            "displayName": "Account",
+            "location": "development-team/account"
+        }, {
+            "displayName": "Validation",
+            "location": "development-team/validation"
+        }],
+        "Page 2 Title": [{
+            "displayName": "Login",
+            "location": "development-team/login"
+        }]
+    }
+}
+```
 
-## MVP TODOs:
+## Why Electron?
+Most of the existing Gitlab CI monitor/dashboard apps are hostable web servers that hit 
+Gitlab through browser requests. This works fine for teams that use gitlab.com; however,
+enterprises that use self-hosted Gitlab instances might not have CORS enabled or behaving 
+correctly. Using Electron instead of a pure web app opens up the option of using Node's HTTP 
+libraries, avoiding the need to deal with CORS.
 
-- [X] Build the project more sensibly, probably requires ejecting CRA.
-
-- [X] Read projects/api/refresh rate configuration from a URL
-
-- [X] Read projects/api/refresh rate configuration from a file
-
-- [X] Persist config location between app loads (electron-config)
-
-- [X] Use correct Gitlab API (Should track pipelines instead of jobs)
-
-- [X] URL encode projects' path instead of using project id
-
-- [X] Pretty up css and orient cards well
-
-- [ ] Add to README
-
-- [ ] Build pipeline and unit tests
-
-- [ ] Do not pass down fetch config as props (use React contexts maybe?)
-
-- [X] Standardize config names with internal names
-
-- [X] Do not use browser fetch to avoid CORS issues on self-hosted gitlab
-
-- [ ] Add error messaging to Config page
-
-- [ ] Add error messaging to Projects page
+More importantly, it's nice to not have to stand up a server which has your Gitlab API token
+just to get your team's builds showing up on a TV.
