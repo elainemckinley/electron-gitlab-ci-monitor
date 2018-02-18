@@ -28,7 +28,7 @@ class Canvas extends Component {
                         showArrows={true}
                         showThumbs={false}
                         transitionTime={1000}
-                        interval={config.carouselInterval}
+                        interval={config.autoScrollInterval}
                         infiniteLoop
                         autoPlay>
                         {Object.keys(config.projects).map(
@@ -66,7 +66,7 @@ class Canvas extends Component {
             project={project}
             apiBase={config.apiBaseUrl}
             apiToken={config.apiToken}
-            refreshRate={config.projectRefreshMillis}
+            refreshRate={config.refreshInterval}
         />
     }
 }

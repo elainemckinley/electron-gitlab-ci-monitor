@@ -1,8 +1,8 @@
 {
     "apiToken": "fake token",
     "apiBaseUrl": "http://localhost:3000/api/v4",
-    "projectRefreshMillis": 5000,
-    "carouselInterval": 3000,
+    "refreshInterval": 5000,
+    "autoScrollInterval": 3000,
     "projects": {
         "Services": [{
             "displayName": "Account",
