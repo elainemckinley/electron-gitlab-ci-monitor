@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { CONFIG_FILE_LOCATION } from '../constants'
 import { fetchLocalConfiguration } from './fetchLocalConfiguration'
+import { remote } from 'electron'
 
 class LocalConfig extends Component {
     constructor() {
@@ -25,20 +26,23 @@ class LocalConfig extends Component {
                 event.preventDefault()
                 this.submitConfig(this.state.location)
             }}>
-                <label>Enter location on disk of config file</label>
+                <label>Select config file on disk</label>
                 <br />
-                <input
-                    type="text"
-                    value={this.state.location}
-                    placeholder="./config.json"
-                    onChange={event => this.setState({ location: event.target.value })}
-                />
+                <button
+                    onClick={() =>
+                        remote.dialog.showOpenDialog(
+                            {properties: ['openFile']},
+                            (selectedLocation) => this.submitConfig(selectedLocation[0])
+                        )
+                    }
+                >Choose File...
+                </button>
             </form>
         </div>
     }
 
     async submitConfig(location) {
-        const { config } = this.props
+        const {config} = this.props
         const configuration = await fetchLocalConfiguration(location)
 
         if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
