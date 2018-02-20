@@ -39,13 +39,17 @@ const projects = [{
 }, {
     name: 'billing',
     status: 'running'
+}, {
+    name: 'failure',
+    status: 'failed',
+    code: 500
 }]
 
 const buildPipelinesUrl = (project) => `/api/v4/projects/development-team%2F${project}/pipelines`
-const buildPipelinesConfig = (status) => {
+const buildPipelinesConfig = (status, code) => {
     return {
         method: 'get',
-        responseStatus: 200,
+        responseStatus: code || 200,
         responseBody: JSON.stringify([{
             id: 1,
             ref: 'master',
@@ -55,10 +59,10 @@ const buildPipelinesConfig = (status) => {
 }
 
 const buildPipelineUrl = (project) => `/api/v4/projects/development-team%2F${project}/pipelines/1`
-const buildPipelineConfig = (status) => {
+const buildPipelineConfig = (status, code) => {
     return {
         method: 'get',
-        responseStatus: 200,
+        responseStatus: code || 200,
         responseBody: JSON.stringify({
             id: 1,
             ref: 'master',
@@ -78,8 +82,8 @@ const buildPipelineConfig = (status) => {
 const config = projects.reduce((accumulator, project) => {
     return {
         ...accumulator,
-        [buildPipelinesUrl(project.name)]: buildPipelinesConfig(project.status),
-        [buildPipelineUrl(project.name)]: buildPipelineConfig(project.status)
+        [buildPipelinesUrl(project.name)]: buildPipelinesConfig(project.status, project.code),
+        [buildPipelineUrl(project.name)]: buildPipelineConfig(project.status, project.code)
     }
 }, {})
 

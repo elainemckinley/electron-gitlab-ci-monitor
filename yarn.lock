@@ -4522,9 +4522,9 @@ querystring@0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/querystring/-/querystring-0.2.0.tgz#b209849203bb25df820da756e747005878521620"
 
-quick-simulator-server@^0.1.0:
-  version "0.1.0"
-  resolved "https://registry.yarnpkg.com/quick-simulator-server/-/quick-simulator-server-0.1.0.tgz#2a1b06f7571849f9372b377f2a3b70bc09c9b422"
+quick-simulator-server@^0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/quick-simulator-server/-/quick-simulator-server-0.1.1.tgz#e605c4949c1e23d55a7021e0f03f0c482362577f"
   dependencies:
     express "^4.16.2"
 

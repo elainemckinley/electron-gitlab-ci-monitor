@@ -42,18 +42,21 @@ class LocalConfig extends Component {
     }
 
     async submitConfig(location) {
-        const {config} = this.props
-        const configuration = await fetchLocalConfiguration(location)
+        try {
+            const configuration = await fetchLocalConfiguration(location)
 
-        if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
-            config.set(CONFIG_FILE_LOCATION, {
-                type: 'local',
-                location
-            })
-            this.props.onConfigReceived(configuration)
-        } else {
-            console.error('Configuration does not contain all necessary keys')
-            config.delete(CONFIG_FILE_LOCATION)
+            if (configuration['apiToken'] && configuration['apiBaseUrl'] && configuration['projects']) {
+                this.props.config.set(CONFIG_FILE_LOCATION, {
+                    type: 'local',
+                    location
+                })
+                this.props.onConfigReceived(configuration)
+            } else {
+                this.props.setErrors(['Error: specified configuration does not contain all necessary keys'])
+                this.props.config.delete(CONFIG_FILE_LOCATION)
+            }
+        } catch (exception) {
+            this.props.setErrors([exception.toString()])
         }
     }
 }

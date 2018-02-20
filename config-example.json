@@ -44,6 +44,9 @@
         }, {
             "displayName": "Billing",
             "location": "development-team/billing"
+        }, {
+            "displayName": "Should Fail",
+            "location": "development-team/failure"
         }]
     }
 }

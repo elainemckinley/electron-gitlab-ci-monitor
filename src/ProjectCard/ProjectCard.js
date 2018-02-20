@@ -22,13 +22,12 @@ class ProjectCard extends Component {
 
         let refreshProject = async () => {
             try {
-                const projectStatus = await fetchProjectStatus(
-                    project.location, apiBase, apiToken)
+                const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
                 this.setState({
                     ...projectStatus
                 })
-            } catch (e) {
-                this.setState({ status: 'failed' })
+            } catch (exception) {
+                this.setState({ error: exception.toString() })
             }
         }
 
@@ -48,9 +47,8 @@ class ProjectCard extends Component {
     }
 
     render() {
-        const { location, displayName } = this.props.project
+        const { displayName } = this.props.project
         const { status, lastRun } = this.state
-        const projectName = location.split('/').slice(-1)
         let displayStatus = status
         let timestamp = ''
         const statusClassList = []
@@ -66,15 +64,21 @@ class ProjectCard extends Component {
         return <div className={`ProjectCard ${status}`}>
             <div>
                 <h2>{displayName}</h2>
-                <div className="description">
-                    {projectName}
-                </div>
+                {this.renderSubtitle()}
             </div>
             <div className="footer">
                 <span className={statusClassList.join(' ')}>{displayStatus}</span>
                 <span>{timestamp}</span>
             </div>
         </div>
+    }
+
+    renderSubtitle() {
+        if (this.state.error) {
+            return <span className="projectCardErrors">{this.state.error}</span>
+        } else {
+            return <div className="description">{this.props.project.location.split('/').slice(-1)}</div>
+        }
     }
 }
 

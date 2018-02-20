@@ -11,7 +11,7 @@ class RemoteConfig extends Component {
     }
 
     componentDidMount() {
-        const { config, loadConfigOnMount } = this.props
+        const {config, loadConfigOnMount} = this.props
         const configuration = config.get(CONFIG_FILE_LOCATION, {})
         if (configuration.type === 'remote' && loadConfigOnMount) {
             this.submitConfig(configuration.location)
@@ -31,7 +31,7 @@ class RemoteConfig extends Component {
                         type="text"
                         value={this.state.location}
                         placeholder="http://www.example.com/config.json"
-                        onChange={event => this.setState({ location: event.target.value })}
+                        onChange={event => this.setState({location: event.target.value})}
                     />
                 </label>
             </form>
@@ -39,18 +39,22 @@ class RemoteConfig extends Component {
     }
 
     async submitConfig(location) {
-        const configuration = await fetchRemoteConfiguration(location)
+        try {
+            const configuration = await fetchRemoteConfiguration(location)
 
-        if (configuration['apiToken'] && configuration['apiBaseUrl']
-            && configuration['projects']) {
-            this.props.config.set(CONFIG_FILE_LOCATION, {
-                type: 'remote',
-                location
-            })
-            this.props.onConfigReceived(configuration)
-        } else {
-            console.error('Configuration does not contain all necessary keys')
-            this.props.config.delete(CONFIG_FILE_LOCATION)
+            if (configuration['apiToken'] && configuration['apiBaseUrl']
+                && configuration['projects']) {
+                this.props.config.set(CONFIG_FILE_LOCATION, {
+                    type: 'remote',
+                    location
+                })
+                this.props.onConfigReceived(configuration)
+            } else {
+                this.props.setErrors(['Error: specified configuration does not contain all necessary keys'])
+                this.props.config.delete(CONFIG_FILE_LOCATION)
+            }
+        } catch (exception) {
+            this.props.setErrors([exception.toString()])
         }
     }
 }
