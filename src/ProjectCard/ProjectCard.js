@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './ProjectCard.css'
-import fetchProjectStatus from './fetchProjectStatus'
+import { fetchProjectStatus } from './fetchProjectStatus'
 import moment from 'moment'
 
 class ProjectCard extends Component {
@@ -27,7 +27,7 @@ class ProjectCard extends Component {
                     ...projectStatus
                 })
             } catch (exception) {
-                this.setState({ error: exception.toString() })
+                this.setState({error: exception.toString()})
             }
         }
 
@@ -47,8 +47,8 @@ class ProjectCard extends Component {
     }
 
     render() {
-        const { displayName } = this.props.project
-        const { status, lastRun } = this.state
+        const {displayName} = this.props.project
+        const {status, lastRun} = this.state
         let displayStatus = status
         let timestamp = ''
         const statusClassList = []

@@ -1,6 +1,6 @@
 import { get } from '../util/fetchUtil'
 
-export default async (projectLocation, apiBase, apiToken) => {
+const fetchProjectStatus = async (projectLocation, apiBase, apiToken) => {
     const pipelinesUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines?private_token=${apiToken}`
     const pipelines = await get(pipelinesUrl)
     const filteredPipelines = pipelines.body.filter(p => p.status !== 'skipped')
@@ -10,12 +10,11 @@ export default async (projectLocation, apiBase, apiToken) => {
     const lastPipelineResponse = await get(lastPipelineUrl)
     const lastPipeline = lastPipelineResponse.body
 
-    const newStatus = {
+    return {
         status: lastPipeline.status,
         lastModifiedBy: lastPipeline.user.name,
         lastRun: lastPipeline.finished_at
     }
-    console.log('changed to ', newStatus)
-
-    return newStatus
 }
+
+export { fetchProjectStatus }

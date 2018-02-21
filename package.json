@@ -37,6 +37,7 @@
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",
     "jest": "^22.2.2",
+    "jest-css-modules": "^1.1.0",
     "quick-simulator-server": "^0.1.1",
     "request": "^2.83.0",
     "style-loader": "^0.20.1",
