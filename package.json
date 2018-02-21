@@ -6,6 +6,7 @@
   "scripts": {
     "start": "electron . & webpack --watch & node simulator.js",
     "build": "webpack",
+    "package": "node ./buildPackage.js",
     "test": "jest --watch",
     "test:once": "jest",
     "lint": "eslint ./src/**/*.js ./__tests__/**/*.js"
@@ -32,6 +33,7 @@
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "0.28.7",
+    "electron-packager": "^11.0.1",
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",
     "jest": "^22.2.2",
