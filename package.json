@@ -8,13 +8,17 @@
     "build": "webpack",
     "package": "node ./buildPackage.js",
     "test": "jest --watch",
-    "test:once": "jest",
+    "test:once": "jest --coverage",
     "lint": "eslint ./src/**/*.js ./__tests__/**/*.js"
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules"
-    }
+      "\\.(css)$": "<rootDir>/node_modules/jest-css-modules",
+      "electron": "<rootDir>/__tests__/testHelpers/mocks/electron.js",
+      "request": "<rootDir>/__tests__/testHelpers/mocks/request.js"
+    },
+    "collectCoverageFrom": ["src/**/*.js"],
+    "testPathIgnorePatterns": ["/testHelpers/"]
   },
   "dependencies": {
     "electron": "^1.8.2",
@@ -34,6 +38,8 @@
     "babel-preset-stage-0": "^6.24.1",
     "css-loader": "0.28.7",
     "electron-packager": "^11.0.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
     "eslint": "^4.17.0",
     "eslint-plugin-react": "^7.6.1",
     "jest": "^22.2.2",
