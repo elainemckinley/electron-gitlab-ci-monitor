@@ -23,7 +23,7 @@ test('renders project information', () => {
     expect(displayHeader.textContent).toEqual('My Project')
 })
 
-test('assigns updated status on a timer', async (done) => {
+test('assigns updated status on a timer', async () => {
     const fetchProjectStatusResponse = new Promise(resolve => resolve({
         status: 'success',
         lastRun: '2018-01-01T12:00:00Z'
@@ -38,11 +38,9 @@ test('assigns updated status on a timer', async (done) => {
 
     await fetchProjectStatusResponse
     expect(card.classList).toContain('success')
-
-    done()
 })
 
-test('renders error when fetch fails', async (done) => {
+test('renders error when fetch fails', async () => {
     const fetchProjectStatusResponse = new Promise((resolve, reject) => reject(
         'failed to fetch'
     ))
@@ -59,8 +57,6 @@ test('renders error when fetch fails', async (done) => {
 
     const card = TestUtils.findRenderedDOMComponentWithClass(output, 'projectCardErrors')
     expect(card.textContent).toContain('failed to fetch')
-
-    done()
 })
 
 const noOp = _ => _

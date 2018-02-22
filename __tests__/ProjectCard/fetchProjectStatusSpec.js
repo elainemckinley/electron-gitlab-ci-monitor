@@ -1,9 +1,8 @@
 import { fetchProjectStatus } from '../../src/ProjectCard/fetchProjectStatus'
 import * as fetchUtil from '../../src/util/fetchUtil'
 
-fetchUtil.get = jest.fn()
-
 beforeEach(() => {
+    fetchUtil.get = jest.fn()
     fetchUtil.get.mockReturnValueOnce(Promise.resolve({
         body: [{
             id: '2',
