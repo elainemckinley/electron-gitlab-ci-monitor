@@ -1,4 +1,4 @@
-# Gitlab CI Build Monitor
+# Gitlab CI Build Monitor [![Build Status](https://travis-ci.org/austinmckinley/electron-gitlab-ci-monitor.svg?branch=master)](https://travis-ci.org/austinmckinley/electron-gitlab-ci-monitor)
 See your team's build statuses at a glance.
 ![Monitor Screenshot](https://i.imgur.com/9uqgfzA.png)
 

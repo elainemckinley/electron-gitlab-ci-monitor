@@ -1,8 +1,9 @@
 language: node_js
 node_js:
   - "node"
-install:
-  - yarn
+cache:
+  directories:
+    - "node_modules"
 script:
-  - yarn run test
+  - yarn run test:once
   - yarn run lint
