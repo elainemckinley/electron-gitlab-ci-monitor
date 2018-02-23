@@ -20,16 +20,16 @@ describe('get', () => {
         expect(resolvedResponse).toEqual(response)
     })
 
-    test('throws error when error is received', async () => {
+    test('throws error when error is received', async (done) => {
         requestBase.get = jest.fn((url, options, callbackFn) => {
             callbackFn(null, {statusCode: 500})
         })
 
-        try {
-            await get('http://example.com/some-endpoint')
-            fail('get should have thrown an exception')
-        } catch (exception) {
-            expect(exception).toContain('Error calling http://example.com/some-endpoint')
-        }
+        get('http://example.com/some-endpoint')
+            .then(() => {
+                throw 'get should have thrown an exception'
+            })
+            .catch(exception => expect(exception).toContain('Error calling http://example.com/some-endpoint'))
+            .then(done)
     })
 })
