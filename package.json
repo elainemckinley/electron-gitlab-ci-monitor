@@ -1,6 +1,6 @@
 {
   "name": "electron-gitlab-ci-monitior",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "main": "electron/main.js",
   "scripts": {
@@ -17,8 +17,12 @@
       "electron": "<rootDir>/__tests__/testHelpers/mocks/electron.js",
       "request": "<rootDir>/__tests__/testHelpers/mocks/request.js"
     },
-    "collectCoverageFrom": ["src/**/*.js"],
-    "testPathIgnorePatterns": ["/testHelpers/"]
+    "collectCoverageFrom": [
+      "src/**/*.js"
+    ],
+    "testPathIgnorePatterns": [
+      "/testHelpers/"
+    ]
   },
   "dependencies": {
     "electron": "^1.8.2",
