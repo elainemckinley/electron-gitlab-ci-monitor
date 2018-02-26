@@ -9,6 +9,7 @@
     "package": "node ./buildPackage.js",
     "test": "jest --watch",
     "test:once": "jest --coverage",
+    "simulators": "node simulator.js",
     "lint": "eslint ./src/**/*.js ./__tests__/**/*.js"
   },
   "jest": {

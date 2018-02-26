@@ -24,7 +24,8 @@ class ProjectCard extends Component {
             try {
                 const projectStatus = await fetchProjectStatus(project.location, apiBase, apiToken)
                 this.setState({
-                    ...projectStatus
+                    ...projectStatus,
+                    error: null
                 })
             } catch (exception) {
                 this.setState({error: exception.toString()})
