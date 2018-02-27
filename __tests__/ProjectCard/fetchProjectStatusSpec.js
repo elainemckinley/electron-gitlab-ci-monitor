@@ -32,7 +32,7 @@ beforeEach(() => {
 })
 
 test('fetches pipeline from last relevant build', async () => {
-    const projectStatus = await fetchProjectStatus('my-team/my-project', 'feature', 'http://fake-gitlab.com/api/v4', 'mytoken')
+    const projectStatus = await fetchProjectStatus('my-team/my-project', ['blah', 'feature'], 'http://fake-gitlab.com/api/v4', 'mytoken')
     expect(projectStatus).toEqual({
         status: 'just fine',
         lastModifiedBy: 'Bob Loblaw',

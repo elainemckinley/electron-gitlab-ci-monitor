@@ -6,7 +6,8 @@
     "projects": {
         "Services": [{
             "displayName": "Account",
-            "location": "development-team/account"
+            "location": "development-team/account",
+            "branches": ["master", "login-feature"]
         }, {
             "displayName": "Validation",
             "location": "development-team/validation"

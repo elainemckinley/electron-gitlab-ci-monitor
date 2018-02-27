@@ -1,21 +1,27 @@
 import { get } from '../util/fetchUtil'
 
-const fetchProjectStatus = async (projectLocation, branch, apiBase, apiToken) => {
+const fetchProjectStatus = async (projectLocation, branches, apiBase, apiToken) => {
     const pipelinesUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines?private_token=${apiToken}`
     const pipelines = await get(pipelinesUrl)
-    const filteredPipelines = pipelines.body
+    const lastPipeline = pipelines.body
         .filter(p => p.status !== 'skipped')
-        .filter(p => p.ref === (branch || 'master'))
-    const pipelineId = filteredPipelines[0]['id']
+        .find(p => (branches && branches.length) ? branches.includes(p.ref) : true)
 
+    if (!lastPipeline) {
+        return {
+            status: 'error'
+        }
+    }
+
+    const pipelineId = lastPipeline['id']
     const lastPipelineUrl = `${apiBase}/projects/${encodeURIComponent(projectLocation)}/pipelines/${pipelineId}?private_token=${apiToken}`
     const lastPipelineResponse = await get(lastPipelineUrl)
-    const lastPipeline = lastPipelineResponse.body
+    const lastPipelineDetails = lastPipelineResponse.body
 
     return {
-        status: lastPipeline.status,
-        lastModifiedBy: lastPipeline.user.name,
-        lastRun: lastPipeline.finished_at
+        status: lastPipelineDetails.status,
+        lastModifiedBy: lastPipelineDetails.user.name,
+        lastRun: lastPipelineDetails.finished_at
     }
 }
 
