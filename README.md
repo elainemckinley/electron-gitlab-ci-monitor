@@ -8,7 +8,7 @@ See your team's build statuses at a glance.
 1. Start the app, and set the location for your config file.
 
 ### Config file format:
-```json
+```
 {
     "apiToken": "your gitlab api token",
     "apiBaseUrl": "http://gitlab.com/api/v4",
@@ -17,7 +17,8 @@ See your team's build statuses at a glance.
     "projects": {
         "Page 1 Title": [{
             "displayName": "Account",
-            "location": "development-team/account"
+            "location": "development-team/account",
+            "branch": "staged" // defaults to master
         }, {
             "displayName": "Validation",
             "location": "development-team/validation"
