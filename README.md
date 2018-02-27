@@ -18,7 +18,7 @@ See your team's build statuses at a glance.
         "Page 1 Title": [{
             "displayName": "Account",
             "location": "development-team/account",
-            "branch": "staged" // defaults to master
+            "branches": ["staged", "master"] // defaults to all branches
         }, {
             "displayName": "Validation",
             "location": "development-team/validation"
