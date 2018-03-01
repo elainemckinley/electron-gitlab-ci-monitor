@@ -15,7 +15,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  flex: 1 1 250px;
+  flex: 1 1 30%;
   min-width: 250px;
   background-color: transparent;
   color: #222222;
