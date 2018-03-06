@@ -29,6 +29,7 @@ class Canvas extends Component {
                         showThumbs={false}
                         transitionTime={1000}
                         interval={config.autoScrollInterval}
+                        stopOnHover={false}
                         infiniteLoop
                         autoPlay>
                         {Object.keys(config.projects).map(
