@@ -14,14 +14,14 @@ let mainWindow
 
 function createWindow() {
     // Create the browser window.
-    mainWindow = new BrowserWindow({ width: 800, height: 600 })
+    mainWindow = new BrowserWindow({width: 800, height: 600})
 
     // and load the index.html of the app.
     mainWindow.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
         slashes: true
-      }))
+    }))
 
     // Open the DevTools.
     // mainWindow.webContents.openDevTools()
@@ -33,6 +33,25 @@ function createWindow() {
         // when you should delete the corresponding element.
         mainWindow = null
     })
+
+    electron.Menu.setApplicationMenu(electron.Menu.buildFromTemplate([{
+        label: 'Application',
+        submenu: [
+            {
+                label: 'Quit', accelerator: 'Command+Q', click: app.quit
+            }
+        ]
+    }, {
+        label: 'Edit',
+        submenu: [
+            { label: 'Undo', accelerator: 'CmdOrCtrl+Z', selector: 'undo:' },
+            { label: 'Redo', accelerator: 'Shift+CmdOrCtrl+Z', selector: 'redo:' },
+            { type: 'separator' },
+            { label: 'Cut', accelerator: 'CmdOrCtrl+X', selector: 'cut:' },
+            { label: 'Copy', accelerator: 'CmdOrCtrl+C', selector: 'copy:' },
+            { label: 'Paste', accelerator: 'CmdOrCtrl+V', selector: 'paste:' }
+        ]
+    }]))
 }
 
 // This method will be called when Electron has finished
