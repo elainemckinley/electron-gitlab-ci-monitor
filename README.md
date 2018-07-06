@@ -4,7 +4,7 @@ See your team's build statuses at a glance.
 
 ## Getting Started
 1. Install the app for your platform. Installers can be found under releases.
-1. Write a configuration file, either on the machine running the build or hosted remotely.
+1. Write a configuration file, either on the machine running the monitor or hosted remotely.
 1. Start the app, and set the location for your config file.
 
 ### Config file format:
