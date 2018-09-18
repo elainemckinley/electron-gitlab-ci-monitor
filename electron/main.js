@@ -34,6 +34,7 @@ function createWindow() {
         mainWindow = null
     })
 
+    // TODO: Allow opening dev tools without this commented out
     electron.Menu.setApplicationMenu(electron.Menu.buildFromTemplate([{
         label: 'Application',
         submenu: [

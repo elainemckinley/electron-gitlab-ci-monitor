@@ -68,6 +68,7 @@ class Canvas extends Component {
             apiBase={config.apiBaseUrl}
             apiToken={config.apiToken}
             refreshRate={config.refreshInterval}
+            strictSSL={config.strictSSL}
         />
     }
 }
