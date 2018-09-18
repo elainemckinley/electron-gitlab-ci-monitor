@@ -17,12 +17,19 @@ class ProjectCard extends Component {
             project,
             apiBase,
             apiToken,
-            refreshRate
+            refreshRate,
+            strictSSL
         } = this.props
 
         let refreshProject = async () => {
             try {
-                const projectStatus = await fetchProjectStatus(project.location, project.branches, apiBase, apiToken)
+                const projectStatus = await fetchProjectStatus(
+                    project.location,
+                    project.branches,
+                    apiBase,
+                    apiToken,
+                    strictSSL
+                )
                 this.setState({
                     ...projectStatus,
                     error: null

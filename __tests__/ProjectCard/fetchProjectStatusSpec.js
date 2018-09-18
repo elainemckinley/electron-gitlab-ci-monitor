@@ -39,10 +39,12 @@ test('fetches pipeline from last relevant build', async () => {
         lastRun: 'Today'
     })
     expect(fetchUtil.get).toHaveBeenCalledWith(
-        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines?private_token=mytoken'
+        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines?private_token=mytoken',
+        { strictSSL: true },
     )
     expect(fetchUtil.get).toHaveBeenCalledWith(
-        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines/1001?private_token=mytoken'
+        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines/1001?private_token=mytoken',
+        { strictSSL: true },
     )
 })
 
@@ -50,6 +52,7 @@ test('fetches last pipeline from master when no branch specified', async () => {
     await fetchProjectStatus('my-team/my-project', null, 'http://fake-gitlab.com/api/v4', 'mytoken')
 
     expect(fetchUtil.get).toHaveBeenCalledWith(
-        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines/1002?private_token=mytoken'
+        'http://fake-gitlab.com/api/v4/projects/my-team%2Fmy-project/pipelines/1002?private_token=mytoken',
+        { strictSSL: true },
     )
 })
